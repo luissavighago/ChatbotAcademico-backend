@@ -15,7 +15,7 @@ public class AssistantController {
     private EmbeddingService embeddingService;
 
     @PostMapping("/file")
-    public ResponseEntity<Object> loadFile() throws Exception {
+    public ResponseEntity<Object> loadFile() {
         embeddingService.load();
         return ResponseEntity.status(200).body("File loaded successfully");
     }
