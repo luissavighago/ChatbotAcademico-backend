@@ -1,6 +1,7 @@
 package com.chatbot.chatbot.exception;
 
 import com.chatbot.chatbot.dto.ErrorMessageDTO;
+import com.chatbot.chatbot.dto.RestResponseDTO;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
@@ -11,26 +12,38 @@ import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExcep
 public class RestExceptionHandler extends ResponseEntityExceptionHandler {
 
     @ExceptionHandler(Exception.class)
-    private ResponseEntity<ErrorMessageDTO> exceptionHandler(Exception ex){
-        ErrorMessageDTO errorMessageDTO = new ErrorMessageDTO(HttpStatus.BAD_REQUEST, ex.getMessage());
-        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(errorMessageDTO);
+    private ResponseEntity<RestResponseDTO> exceptionHandler(Exception ex){
+        RestResponseDTO restResponseDTO = new RestResponseDTO(
+                new ErrorMessageDTO(HttpStatus.INTERNAL_SERVER_ERROR, ex.getMessage()),
+                false
+        );
+        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(restResponseDTO);
     }
 
     @ExceptionHandler(RuntimeException.class)
-    private ResponseEntity<ErrorMessageDTO> runtimeExceptionHandler(RuntimeException ex){
-        ErrorMessageDTO errorMessageDTO = new ErrorMessageDTO(HttpStatus.BAD_REQUEST, ex.getMessage());
-        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(errorMessageDTO);
+    private ResponseEntity<RestResponseDTO> runtimeExceptionHandler(RuntimeException ex){
+        RestResponseDTO restResponseDTO = new RestResponseDTO(
+                new ErrorMessageDTO(HttpStatus.INTERNAL_SERVER_ERROR, ex.getMessage()),
+                false
+        );
+        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(restResponseDTO);
     }
 
     @ExceptionHandler(FileProcessingException.class)
-    public ResponseEntity<ErrorMessageDTO> fileProcessingExceptionHandler(FileProcessingException ex) {
-        ErrorMessageDTO errorMessageDTO = new ErrorMessageDTO(HttpStatus.BAD_REQUEST, ex.getMessage());
-        return new ResponseEntity<>(errorMessageDTO, HttpStatus.BAD_REQUEST);
+    public ResponseEntity<RestResponseDTO> fileProcessingExceptionHandler(FileProcessingException ex) {
+        RestResponseDTO restResponseDTO = new RestResponseDTO(
+                new ErrorMessageDTO(HttpStatus.UNPROCESSABLE_ENTITY, ex.getMessage()),
+                false
+        );
+        return ResponseEntity.status(HttpStatus.UNPROCESSABLE_ENTITY).body(restResponseDTO);
     }
 
     @ExceptionHandler(DocumentParsingException.class)
-    public ResponseEntity<ErrorMessageDTO> documentParsingExceptionHandler(DocumentParsingException ex) {
-        ErrorMessageDTO errorMessageDTO = new ErrorMessageDTO(HttpStatus.BAD_REQUEST, ex.getMessage());
-        return new ResponseEntity<>(errorMessageDTO, HttpStatus.UNPROCESSABLE_ENTITY);
+    public ResponseEntity<RestResponseDTO> documentParsingExceptionHandler(DocumentParsingException ex) {
+        RestResponseDTO restResponseDTO = new RestResponseDTO(
+                new ErrorMessageDTO(HttpStatus.UNPROCESSABLE_ENTITY, ex.getMessage()),
+                false
+        );
+        return ResponseEntity.status(HttpStatus.UNPROCESSABLE_ENTITY).body(restResponseDTO);
     }
 }
