@@ -10,5 +10,5 @@ import org.springframework.http.HttpStatus;
 @Setter
 public class ErrorMessageDTO {
     private HttpStatus status;
-    private String message;
+    private String err;
 }

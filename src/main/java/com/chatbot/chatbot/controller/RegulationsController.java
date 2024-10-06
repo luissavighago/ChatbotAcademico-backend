@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping(value = "/regulation", produces = "aplication/json")
+@RequestMapping(value = "/regulation")
 @Tag(name = "Regulamentos")
 public class RegulationsController {
 
