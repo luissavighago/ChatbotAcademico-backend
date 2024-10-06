@@ -3,6 +3,7 @@ package com.chatbot.chatbot.repository;
 import org.springframework.ai.document.Document;
 import org.springframework.ai.embedding.EmbeddingModel;
 import org.springframework.ai.vectorstore.PgVectorStore;
+import org.springframework.ai.vectorstore.SearchRequest;
 import org.springframework.ai.vectorstore.VectorStore;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -22,5 +23,9 @@ public class PGVectorRepository {
 
     public void add(List<Document> documentList) {
         vectorStore.add(documentList);
+    }
+
+    public List<Document> searchSimilarity(SearchRequest searchRequest) {
+        return vectorStore.similaritySearch(searchRequest);
     }
 }
