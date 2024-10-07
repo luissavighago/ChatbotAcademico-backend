@@ -1,12 +1,11 @@
 package com.chatbot.chatbot.service;
 
-import com.chatbot.chatbot.dto.ChatDTO;
 import com.chatbot.chatbot.models.ChatModel;
 import com.chatbot.chatbot.models.QuestionModel;
-import com.chatbot.chatbot.models.ResponseModel;
+import com.chatbot.chatbot.models.AnswerModel;
 import com.chatbot.chatbot.repository.ChatRepository;
 import com.chatbot.chatbot.repository.QuestionRepository;
-import com.chatbot.chatbot.repository.ResponseRepository;
+import com.chatbot.chatbot.repository.AnswerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -20,7 +19,7 @@ public class ChatService {
     private QuestionRepository questionRepository;
 
     @Autowired
-    private ResponseRepository responseRepository;
+    private AnswerRepository answerRepository;
 
     public ChatModel createChat() {
         try {
@@ -46,15 +45,15 @@ public class ChatService {
         }
     }
 
-    public ResponseModel createResponse(QuestionModel questionModel, String response) {
+    public AnswerModel createAnswer(QuestionModel questionModel, String response) {
         try{
-            ResponseModel responseModel = new ResponseModel();
-            responseModel.setResponse(response);
-            responseModel.setQuestion(questionModel);
+            AnswerModel answerModel = new AnswerModel();
+            answerModel.setAnswer(response);
+            answerModel.setQuestion(questionModel);
 
-            responseRepository.save(responseModel);
+            answerRepository.save(answerModel);
 
-            return responseModel;
+            return answerModel;
         }catch (Exception e) {
             throw new RuntimeException("Falha ao armazenar a resposta");
         }

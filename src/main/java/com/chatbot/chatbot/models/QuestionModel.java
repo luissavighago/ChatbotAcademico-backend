@@ -26,7 +26,7 @@ public class QuestionModel implements Serializable {
     private ChatModel chat;
 
     @OneToOne(mappedBy = "question", cascade = CascadeType.ALL, orphanRemoval = true)
-    private ResponseModel response;
+    private AnswerModel answer;
 
     @PrePersist
     protected void onCreate() {

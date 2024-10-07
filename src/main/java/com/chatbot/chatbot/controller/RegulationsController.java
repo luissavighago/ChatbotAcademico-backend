@@ -1,5 +1,6 @@
 package com.chatbot.chatbot.controller;
 
+import com.chatbot.chatbot.dto.DataResponseDTO;
 import com.chatbot.chatbot.dto.RestResponseDTO;
 import com.chatbot.chatbot.service.EmbeddingService;
 import io.swagger.v3.oas.annotations.Operation;
@@ -29,6 +30,10 @@ public class RegulationsController {
     @PostMapping("/load")
     public ResponseEntity<RestResponseDTO> loadFile() {
         embeddingService.load();
-        return ResponseEntity.status(200).body(new RestResponseDTO(true, "Regulamento armazenado com sucesso"));
+
+        DataResponseDTO dataResponseDTO = new DataResponseDTO();
+        dataResponseDTO.setMessage("Regulamento armazenado com sucesso");
+
+        return ResponseEntity.status(200).body(new RestResponseDTO(true, dataResponseDTO));
     }
 }

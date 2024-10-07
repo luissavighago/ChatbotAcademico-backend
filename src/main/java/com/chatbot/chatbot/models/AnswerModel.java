@@ -9,20 +9,20 @@ import java.time.LocalDateTime;
 import java.util.UUID;
 
 @Entity
-@Table(name = "tb_response")
+@Table(name = "tb_answer")
 @Getter
 @Setter
-public class ResponseModel implements Serializable {
+public class AnswerModel implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private UUID idResponse;
+    private UUID idAnswer;
 
     @OneToOne
     @JoinColumn(name = "idQuestion", nullable = false)
     private QuestionModel question;
 
     @Column(nullable = false, columnDefinition = "TEXT")
-    private String response;
+    private String answer;
 
     @Column(nullable = false, length = 1)
     private char status = 'P';

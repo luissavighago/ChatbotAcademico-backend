@@ -1,10 +1,11 @@
 package com.chatbot.chatbot.service;
 
+import com.chatbot.chatbot.dto.ChatResponseDTO;
 import com.chatbot.chatbot.dto.RestResponseDTO;
 import com.chatbot.chatbot.enums.PromptTemplateEnum;
 import com.chatbot.chatbot.models.ChatModel;
 import com.chatbot.chatbot.models.QuestionModel;
-import com.chatbot.chatbot.models.ResponseModel;
+import com.chatbot.chatbot.models.AnswerModel;
 import com.chatbot.chatbot.repository.PGVectorRepository;
 import org.springframework.ai.chat.model.ChatResponse;
 import org.springframework.ai.chat.prompt.Prompt;
@@ -38,23 +39,32 @@ public class AssistantService {
             //TODO - Melhorar tratativa de exceção
             throw new RuntimeException("Pergunta é obrigatória");
         }
+
         ChatResponse chatResponse = callOpenAiChatModel(createPrompt(question));
         String response = chatResponse.getResult().getOutput().getContent();
         if(response == null  || response.isBlank()) {
             throw new RuntimeException("Falha ao obter a resposta da API da OpenAI");
         }
 
-        //armazena os dados da conversa
+        //armazenar os dados da conversa
         ChatModel chatModel = chatService.createChat();
         QuestionModel questionModel = chatService.createQuestion(chatModel, question);
-        ResponseModel responseModel = chatService.createResponse(questionModel, response);
+        AnswerModel answerModel = chatService.createAnswer(questionModel, response);
 
-        return setResponseDTO(responseModel);
+        return setResponseDTO(answerModel);
     }
 
-    //TODO - Implementar metodo para atribuir os dados para resposta
-    private RestResponseDTO setResponseDTO(ResponseModel responseModel) {
-        return null;
+    private RestResponseDTO setResponseDTO(AnswerModel answerModel) {
+        //TODO - Adicionar validação dos dados
+
+        ChatResponseDTO chatResponseDTO = new ChatResponseDTO();
+
+        chatResponseDTO.setIdChat(answerModel.getQuestion().getChat().getIdChat());
+        chatResponseDTO.setIdQuestion(answerModel.getQuestion().getIdQuestion());
+        chatResponseDTO.setIdAnswer(answerModel.getIdAnswer());
+        chatResponseDTO.setAnswer(answerModel.getAnswer());
+
+        return new RestResponseDTO(true, chatResponseDTO);
     }
 
     private Prompt createPrompt(String question) {
