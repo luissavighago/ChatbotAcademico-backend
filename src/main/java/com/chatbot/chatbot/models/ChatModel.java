@@ -6,6 +6,7 @@ import lombok.Setter;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.UUID;
 
 @Entity
@@ -19,6 +20,9 @@ public class ChatModel implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private UUID idChat;
     private LocalDateTime dhChat;
+
+    @OneToMany(mappedBy = "chat", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<QuestionModel> questions;
 
     @PrePersist
     protected void onCreate() {
