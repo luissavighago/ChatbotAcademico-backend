@@ -9,6 +9,9 @@ import com.chatbot.chatbot.repository.AnswerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+import java.util.UUID;
+
 @Service
 public class ChatService {
 
@@ -57,5 +60,9 @@ public class ChatService {
         }catch (Exception e) {
             throw new RuntimeException("Falha ao armazenar a resposta");
         }
+    }
+
+    public ChatModel findChatById(UUID id) {
+        return chatRepository.findById(id).orElseThrow(() -> new RuntimeException("Chat não encontrado"));
     }
 }

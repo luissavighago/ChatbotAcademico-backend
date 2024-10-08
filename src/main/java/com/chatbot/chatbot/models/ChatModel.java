@@ -21,7 +21,7 @@ public class ChatModel implements Serializable {
     private UUID idChat;
     private LocalDateTime dhChat;
 
-    @OneToMany(mappedBy = "chat", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "chat", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
     private List<QuestionModel> questions;
 
     @PrePersist

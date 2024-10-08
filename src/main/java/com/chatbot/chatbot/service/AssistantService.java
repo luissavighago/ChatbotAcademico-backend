@@ -2,61 +2,51 @@ package com.chatbot.chatbot.service;
 
 import com.chatbot.chatbot.dto.ChatResponseDTO;
 import com.chatbot.chatbot.dto.RestResponseDTO;
-import com.chatbot.chatbot.enums.PromptTemplateEnum;
 import com.chatbot.chatbot.models.ChatModel;
 import com.chatbot.chatbot.models.QuestionModel;
 import com.chatbot.chatbot.models.AnswerModel;
-import com.chatbot.chatbot.repository.PGVectorRepository;
-import org.springframework.ai.chat.model.ChatResponse;
-import org.springframework.ai.chat.prompt.Prompt;
-import org.springframework.ai.chat.prompt.PromptTemplate;
-import org.springframework.ai.document.Document;
-import org.springframework.ai.openai.OpenAiChatModel;
-import org.springframework.ai.vectorstore.SearchRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Comparator;
 import java.util.List;
-import java.util.Map;
+import java.util.UUID;
+import java.util.stream.Collectors;
 
 @Service
 public class AssistantService {
 
-    private final OpenAiChatModel chatModel;
+    @Autowired
+    private LlmOpenAIService llmOpenAIService;
 
     @Autowired
     private ChatService chatService;
 
-    @Autowired
-    private PGVectorRepository pgVectorRepository;
-
-    public AssistantService(OpenAiChatModel chatModel) {
-        this.chatModel = chatModel;
-    }
-
     public RestResponseDTO sendQuestion(String question) {
-        if (question == null || question.isBlank()) {
-            //TODO - Melhorar tratativa de exceção
-            throw new RuntimeException("Pergunta é obrigatória");
-        }
-
-        ChatResponse chatResponse = callOpenAiChatModel(createPrompt(question));
-        String response = chatResponse.getResult().getOutput().getContent();
-        if(response == null  || response.isBlank()) {
-            throw new RuntimeException("Falha ao obter a resposta da API da OpenAI");
-        }
+        String answer = llmOpenAIService.call(question);
 
         //armazenar os dados da conversa
         ChatModel chatModel = chatService.createChat();
         QuestionModel questionModel = chatService.createQuestion(chatModel, question);
-        AnswerModel answerModel = chatService.createAnswer(questionModel, response);
+        AnswerModel answerModel = chatService.createAnswer(questionModel, answer);
+
+        return setResponseDTO(answerModel);
+    }
+
+    public RestResponseDTO sendQuestion(String question, UUID idChat) {
+        ChatModel chatModel = chatService.findChatById(idChat);
+        String chatHistory = getChatHistory(chatModel);
+
+        String answer = llmOpenAIService.call(question, chatHistory);
+
+        //armazenar os dados da conversa
+        QuestionModel questionModel = chatService.createQuestion(chatModel, question);
+        AnswerModel answerModel = chatService.createAnswer(questionModel, answer);
 
         return setResponseDTO(answerModel);
     }
 
     private RestResponseDTO setResponseDTO(AnswerModel answerModel) {
-        //TODO - Adicionar validação dos dados
-
         ChatResponseDTO chatResponseDTO = new ChatResponseDTO();
 
         chatResponseDTO.setIdChat(answerModel.getQuestion().getChat().getIdChat());
@@ -67,24 +57,39 @@ public class AssistantService {
         return new RestResponseDTO(true, chatResponseDTO);
     }
 
-    private Prompt createPrompt(String question) {
-        List<Document> results = pgVectorRepository.searchSimilarity(SearchRequest.query(question).withTopK(2));
-        PromptTemplate promptTemplate = new PromptTemplate(
-                PromptTemplateEnum.DEFAULT.getTemplate(),
-                Map.of("information", getDocumentInformationMessage(results), "question", question)
-        );
-        return promptTemplate.create();
-    }
-
-    private ChatResponse callOpenAiChatModel(Prompt prompt) {
-        try {
-            return chatModel.call(prompt);
-        }catch (Exception e) {
-            throw new RuntimeException("Falha ao acessar a API da OpenAI");
+    private String getChatHistory(ChatModel chatModel) {
+        List<QuestionModel> lastQuestions = getLastQuestions(chatModel);
+        if(lastQuestions == null || lastQuestions.isEmpty()){
+            return "";
         }
+
+        return concatQuestions(lastQuestions);
     }
 
-    private String getDocumentInformationMessage(List<Document> results) {
-        return results.stream().map(Document::getContent).reduce("", String::concat);
+    private List<QuestionModel> getLastQuestions(ChatModel chatModel) {
+        return chatModel.getQuestions()
+                .stream()
+                .sorted(Comparator.comparing(QuestionModel::getDhQuestion).reversed())
+                .limit(3)
+                .collect(Collectors.toList());
+    }
+
+    private String concatQuestions(List<QuestionModel> lastQuestions) {
+        StringBuilder jsonResult = new StringBuilder("[");
+        for (QuestionModel questionModel : lastQuestions) {
+            String answer = questionModel.getAnswer() == null ? "" : questionModel.getAnswer().getAnswer();
+            jsonResult.append("{")
+                    .append("\"question\":\"").append(questionModel.getQuestion()).append("\",")
+                    .append("\"response\":\"").append(answer).append("\"")
+                    .append("},");
+        }
+
+        // Remove a última vírgula e fecha o JSON
+        if (jsonResult.length() > 1) {
+            jsonResult.deleteCharAt(jsonResult.length() - 1);
+        }
+        jsonResult.append("]");
+
+        return jsonResult.toString();
     }
 }

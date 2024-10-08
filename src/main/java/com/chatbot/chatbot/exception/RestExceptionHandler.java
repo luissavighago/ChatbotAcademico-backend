@@ -4,6 +4,7 @@ import com.chatbot.chatbot.dto.ErrorMessageDTO;
 import com.chatbot.chatbot.dto.RestResponseDTO;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.messaging.handler.annotation.support.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
@@ -45,5 +46,14 @@ public class RestExceptionHandler extends ResponseEntityExceptionHandler {
                 false
         );
         return ResponseEntity.status(HttpStatus.UNPROCESSABLE_ENTITY).body(restResponseDTO);
+    }
+
+    @ExceptionHandler(MethodArgumentNotValidException.class)
+    public ResponseEntity<RestResponseDTO> methodArgumentNotValidExceptionHandler(MethodArgumentNotValidException ex) {
+        RestResponseDTO restResponseDTO = new RestResponseDTO(
+                new ErrorMessageDTO(HttpStatus.BAD_REQUEST, ex.getMessage()),
+                false
+        );
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(restResponseDTO);
     }
 }

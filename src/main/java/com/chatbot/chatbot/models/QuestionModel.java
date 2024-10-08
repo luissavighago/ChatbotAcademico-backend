@@ -25,7 +25,7 @@ public class QuestionModel implements Serializable {
     @JoinColumn(name = "chat", nullable = false)
     private ChatModel chat;
 
-    @OneToOne(mappedBy = "question", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToOne(mappedBy = "question", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
     private AnswerModel answer;
 
     @PrePersist
