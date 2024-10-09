@@ -1,6 +1,7 @@
 package com.chatbot.chatbot.service;
 
 import com.chatbot.chatbot.enums.PromptTemplateEnum;
+import com.chatbot.chatbot.exception.LlmServiceException;
 import com.chatbot.chatbot.repository.PGVectorRepository;
 import org.springframework.ai.chat.model.ChatResponse;
 import org.springframework.ai.chat.prompt.Prompt;
@@ -27,28 +28,27 @@ public class LlmOpenAIService {
     }
 
     public String call(String question) {
-        return call(createPrompt(question));
+        return callModel(createPrompt(question));
     }
 
     public String call(String question, String chatHistory) {
-        return call(createPrompt(question, chatHistory));
+        return callModel(createPrompt(question, chatHistory));
     }
 
-    private String call(Prompt prompt) {
-        ChatResponse chatResponse = callChatModel(prompt);
+    private String callModel(Prompt prompt) {
+        ChatResponse chatResponse = executeChatModel(prompt);
         String answer = chatResponse.getResult().getOutput().getContent();
         if(answer == null  || answer.isBlank()) {
-            throw new RuntimeException("Falha ao obter a resposta da API da OpenAI");
+            throw new LlmServiceException("Falha ao obter a resposta da API da OpenAI");
         }
-
         return answer;
     }
 
-    private ChatResponse callChatModel(Prompt prompt) {
+    private ChatResponse executeChatModel(Prompt prompt) {
         try {
             return chatModel.call(prompt);
         }catch (Exception e) {
-            throw new RuntimeException("Falha ao acessar a API da OpenAI");
+            throw new LlmServiceException("Falha ao acessar a API da OpenAI");
         }
     }
 

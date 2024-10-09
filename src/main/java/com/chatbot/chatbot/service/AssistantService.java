@@ -58,24 +58,23 @@ public class AssistantService {
     }
 
     private String getChatHistory(ChatModel chatModel) {
-        List<QuestionModel> lastQuestions = getLastQuestions(chatModel);
-        if(lastQuestions == null || lastQuestions.isEmpty()){
+        if(chatModel.getQuestions() == null || chatModel.getQuestions().isEmpty()){
             return "";
         }
+
+        List<QuestionModel> lastQuestions = chatModel.getQuestions()
+                .stream()
+                .sorted(Comparator.comparing(QuestionModel::getDhQuestion).reversed())
+                .limit(3)
+                .sorted(Comparator.comparing(QuestionModel::getDhQuestion))
+                .collect(Collectors.toList());
 
         return concatQuestions(lastQuestions);
     }
 
-    private List<QuestionModel> getLastQuestions(ChatModel chatModel) {
-        return chatModel.getQuestions()
-                .stream()
-                .sorted(Comparator.comparing(QuestionModel::getDhQuestion).reversed())
-                .limit(3)
-                .collect(Collectors.toList());
-    }
-
     private String concatQuestions(List<QuestionModel> lastQuestions) {
         StringBuilder jsonResult = new StringBuilder("[");
+
         for (QuestionModel questionModel : lastQuestions) {
             String answer = questionModel.getAnswer() == null ? "" : questionModel.getAnswer().getAnswer();
             jsonResult.append("{")
@@ -91,5 +90,10 @@ public class AssistantService {
         jsonResult.append("]");
 
         return jsonResult.toString();
+    }
+
+    private String formatQuestionAnswer(QuestionModel questionModel) {
+        String answer = questionModel.getAnswer() == null ? "" : questionModel.getAnswer().getAnswer();
+        return String.format("{\"question\":\"%s\", \"response\":\"%s\"}", questionModel.getQuestion(), answer);
     }
 }

@@ -56,4 +56,13 @@ public class RestExceptionHandler extends ResponseEntityExceptionHandler {
         );
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(restResponseDTO);
     }
+
+    @ExceptionHandler(LlmServiceException.class)
+    public ResponseEntity<RestResponseDTO> llmServiceExceptionHandler(LlmServiceException ex) {
+        RestResponseDTO restResponseDTO = new RestResponseDTO(
+                new ErrorMessageDTO(HttpStatus.UNPROCESSABLE_ENTITY, ex.getMessage()),
+                false
+        );
+        return ResponseEntity.status(HttpStatus.UNPROCESSABLE_ENTITY).body(restResponseDTO);
+    }
 }
