@@ -1,4 +1,4 @@
-﻿_CAPITULO_ 1 - DOS ESTÁGIOS E SUAS FINALIDADES E MODALIDADES
+_CAPITULO_ 1 - DOS ESTÁGIOS E SUAS FINALIDADES E MODALIDADES
 Art. 1º O estágio, como previsto na Lei nº 11.788, de 25 de setembro de 2008, é ato educativo escolar supervisionado, desenvolvido no ambiente de trabalho, que visa à preparação para o trabalho produtivo de discentes que estejam frequentando o ensino regular em instituições de educação superior, de educação profissional, de ensino médio, da educação especial e dos anos finais do ensino fundamental, na modalidade profissional da educação de jovens e adultos.
 Art. 2º As disposições desse regulamento aplicam-se a todos alunos dos cursos de bacharelado, dos cursos superiores de tecnologia e dos cursos de educação profissional técnica de nível médio, estendendo-se aos alunos estrangeiros, regularmente matriculados na UTFPR.
 Art. 3º O estágio poderá ser obrigatório (de caráter curricular) ou não obrigatório (de caráter extracurricular), conforme determinação das diretrizes curriculares da etapa, modalidade, área de ensino e do PPC do curso do aluno.
@@ -217,3 +217,195 @@ Art. 60 No que couber, os cursos deverão respeitar os itens referentes a estág
 Art. 61 Nos primeiros dois anos de vigência do presente regulamento estão autorizados estágio não obrigatório, mesmo que não previstos no PPC dos cursos.
 Art. 62 Este regulamento entra em vigor na data da sua publicação e revoga as versões anteriores e disposições em contrário.
 Parágrafo único: Percebendo a necessidade de prazos maiores para implementação de alguns artigos deste regulamento, isso poderá ser definido em Instruções Normativas próprias publicada posteriormente.
+
+_CAPITULO_
+1. Estágio Curricular - Informações Gerais
+Estágio Não Obrigatório: O aluno pode iniciar a partir do 1º semestre do curso.
+Estágio Obrigatório: Deve ser realizado para obtenção do diploma de Engenheiro(a) de Software, com carga horária mínima de 400 horas. O aluno pode iniciar somente a partir do 6º semestre do curso.
+2. Pessoas Envolvidas no Processo de Estágio
+Aluno: Regularmente matriculado no curso de Engenharia de Software.
+Supervisor: Funcionário da empresa responsável pelo estágio.
+Orientador: Professor lotado na COENS.
+PRAE: Professor responsável pelas atividades de estágio na COENS.
+DEPEC: Departamento de Estágios da UTFPR-DV.
+_CAPITULO_
+3. Registro de Estágio - Etapas
+3.1. Elaborar o Plano de Estágio
+Plano de Estágio (PE): Primeiro documento a ser preenchido, contendo dados do aluno, orientador, empresa, datas de início e fim, carga horária semanal e atividades a serem realizadas.
+O aluno deve convidar um professor orientador da COENS para auxiliar na elaboração do PE. O modelo do plano está disponível em www.utfpr.edu.br/estagios.
+3.2. Professor Orientador de Estágio
+O aluno é responsável por convidar um professor da COENS. A lista de docentes está em https://coens.dv.utfpr.edu.br/site/docentes.
+Caso tenha dificuldades para encontrar um orientador, deve contatar o PRAE.
+3.3. Validação do Plano de Estágio
+O orientador é responsável por verificar e validar o PE, garantindo que as atividades estejam de acordo com o PPC do curso.
+O PRAE pode ser contatado para auxiliar na validação.
+3.4. Assinaturas do Plano de Estágio
+O PE deve ser assinado pelo aluno (à caneta ou digitalmente), supervisor (à caneta ou digitalmente), e orientador (via SEI – sistema da UTFPR).
+_CAPITULO_
+4. Cadastro no Sistema de Estágio da UTFPR
+4.1. Obrigatoriedade de Cadastro:
+O cadastro é obrigatório tanto para o aluno quanto para a empresa no sistema de estágios da UTFPR: estagio.utfpr.edu.br.
+4.2. Cadastro do Aluno
+Selecionar Câmpus Dois Vizinhos e clicar em “logar”.
+No menu à esquerda, clicar em “aluno” e depois em “Para acessar é necessário cadastrar-se. clique aqui…”.
+Inserir as informações solicitadas e confirmar.
+4.3. Cadastro da Empresa
+Selecionar Câmpus Dois Vizinhos e clicar em “logar”.
+No menu à esquerda, clicar em “EMPRESA” e depois em “Cadastrar empresa. clique aqui…”.
+Inserir modalidade e código (CPF, CNPJ), em seguida confirmar e preencher as informações necessárias.
+4.4. Envio do Plano de Estágio
+O plano deve ser enviado para o e-mail depec-dv@utfpr.edu.br.
+O DEPEC irá avaliar o plano e retornar com instruções.
+_CAPITULO_ Estágio Curricular - Regulamentação Geral
+A Resolução Conjunta nº 01, de 02 de junho de 2020, prevê a realização do estágio curricular de caráter obrigatório e não obrigatório.
+No Curso de Engenharia de Software do Câmpus Dois Vizinhos, o estágio curricular obrigatório tem carga horária mínima de 400 horas e é um requisito para a obtenção do diploma.
+Objetivos do estágio:
+I. Facilitar a futura inserção do estudante no mercado de trabalho;
+II. Promover a articulação da UTFPR com o mundo do trabalho;
+III. Facilitar a adaptação social e psicológica do estudante à futura atividade profissional.
+Para realizar o estágio obrigatório:
+O estudante deve estar matriculado no 6º período;
+O estágio ocorre após cursar disciplinas base para o aproveitamento do estágio;
+A coordenação do curso e o responsável por estágios julgarão cada caso.
+Estágios não obrigatórios também podem ser desenvolvidos como Atividades Complementares.
+_CAPITULO_ Realização do Estágio Curricular
+Preenchimento de Relatórios:
+Relatórios de acompanhamento são obrigatórios para estágios obrigatórios e não obrigatórios;
+Os relatórios devem ser preenchidos, assinados e encaminhados.
+Modelos estão disponíveis em: www.utfpr.edu.br/estagios.
+Quantidade de Relatórios:
+Para estágios de duração inferior a 6 meses: entregar um relatório de cada tipo mencionado anteriormente.
+Para estágios de duração superior a 6 meses: entregar relatórios a cada seis meses.
+Relatório de Visita à Unidade Concedente de Estágio
+Orientador:
+Somente para estágio obrigatório.
+Preencher após completar 100 horas de estágio obrigatório.
+Caso os relatórios não sejam entregues em até 45 dias após o prazo:
+O PRAE solicitará à DIREC o cancelamento do TCE ou não dará andamento ao Termo Aditivo ou novo TCE.
+_CAPITULO_ Termo Aditivo
+Quando usar:
+Para ambos os tipos de estágio (obrigatório e não obrigatório);
+Sempre que houver mudanças no contrato inicial, como:
+Alteração da data de término do contrato;
+Alteração do horário de trabalho;
+Alteração salarial, entre outros.
+Contate o orientador e o DEPEC-DV para aditivar o contrato de estágio.
+O Termo Aditivo deve ser acompanhado de um novo plano de estágio.
+Finalização do Estágio
+Relatórios e Comunicação:
+Ao finalizar o estágio (independente da causa: fim de prazo, desligamento, etc.), providencie todos os relatórios e comunique o professor orientador.
+_CAPITULO_ Validação do Estágio Curricular Obrigatório
+Casos em que é possível solicitar a validação de estágio obrigatório:
+O aluno pode solicitar a validação se exercer atividade profissional correlata ao curso na condição de:
+Empregado: Apresentar cópia do contrato de trabalho e declaração da organização onde atua, em papel timbrado e assinada pelo representante legal, indicando o cargo e atividades desempenhadas.
+Empresário: Apresentar cópia do Contrato Social e cartão do CNPJ comprovando participação no quadro societário da empresa.
+Autônomo: Apresentar comprovante de registro na Prefeitura Municipal, comprovante de recolhimento do ISS e carnê de contribuição ao INSS.
+Produtor Rural: Apresentar cópia de nota de produtor relacionada à atividade.
+Procedimento para Solicitação de Validação
+Requisitos para Solicitação:
+O aluno deve comprovar que cumpriu 400 horas de atividade profissional após o 6º período do curso de Engenharia de Software.
+Atividades realizadas antes do 6º período não são consideradas no cálculo da carga horária.
+Orientador de Estágio:
+É necessário ter um professor orientador para auxiliar na elaboração do relatório final de estágio.
+O aluno deve convidar um professor da COENS para ser seu orientador.
+Lista de professores disponível em: https://coens.dv.utfpr.edu.br/site/docentes.
+Caso não encontre um orientador, entre em contato com o PRAE da COENS.
+Processo de Solicitação
+A solicitação de validação deve ser feita por meio do Formulário de Solicitação de Validação de Estágio Obrigatório.
+Todos os documentos comprobatórios devem ser enviados junto com o formulário: https://docs.google.com/forms/d/e/1FAIpQLSdRh6J5IM6PmhPckBx06kAQ-hiDanboFv-h2NneGA0pitxyXg/viewform
+Análise e Decisão:
+O PRAE fará a análise e pode:
+Deferir: O aluno deverá redigir o relatório de estágio obrigatório com auxílio do orientador e defender o estágio perante uma banca examinadora.
+Indeferir: O aluno deverá realizar o estágio obrigatório seguindo as etapas e atividades conforme o Regulamento de Estágios da UTFPR.
+_CAPITULO_ Defesa de Estágio Curricular
+Estágio NÃO Obrigatório:
+Não é necessário realizar defesa de estágio não obrigatório.
+Etapas Finais:
+Elaborar um relatório final simples, descrevendo as atividades realizadas na empresa.
+Enviar para o orientador validar e arquivar no SEI e SIACOES.
+_CAPITULO_ Defesa de Estágio Obrigatório (Regular ou Validação)
+Necessidade de Defesa:
+É necessário realizar a defesa do estágio obrigatório perante uma banca examinadora composta pelo professor orientador e mais dois professores lotados na COENS.
+Pré-requisitos para a Defesa:
+Cumprir todas as regras estabelecidas nos Regulamentos de Estágio da UTFPR e COENS.
+Cumprir a carga horária mínima de 400 horas de estágio ou de atividades profissionais.
+Entregar todos os relatórios parciais de avaliação (somente para estágio obrigatório regular).
+Elaborar o Relatório Final de Estágio:
+O relatório deve ser elaborado com supervisão do professor orientador.
+O modelo está disponível no SIACOES, em "Regulamentos e Anexos" na parte de Estágios.
+Formato de Defesa de Estágio
+Apresentação:
+O aluno deve apresentar o relatório final de forma presencial ou remota para a banca examinadora em até 20 minutos.
+Cada membro da banca terá até 10 minutos para arguir.
+Procedimento para Agendar a Banca:
+Acessar o SIACOES: https://coensapp.dv.utfpr.edu.br/siacoes.
+Agendar a data da defesa e indicar a banca examinadora (composta por dois docentes vinculados à COENS).
+Enviar o Relatório Final de Estágio via SIACOES, respeitando o prazo estipulado no Edital de Estágio da COENS (lançado no início de cada período letivo).
+_CAPITULO_ Após a Defesa de Estágio
+Registro:
+O Professor Orientador deverá registrar a ata de defesa no SEI, conforme a base de conhecimento – Avaliação Final de Estágio.
+Correções e Entrega do Relatório Final Corrigido:
+Se aprovado, o aluno deverá entregar o Relatório Final com as correções solicitadas pela banca em até 10 dias após a defesa.
+A não entrega do Relatório Final Corrigido no prazo estipulado acarreta na reprovação e na necessidade de realizar um novo Estágio Obrigatório.
+Edital de Estágio
+Edital de Estágio da COENS:
+Todo semestre é lançado com datas e procedimentos para as defesas de estágios obrigatórios.
+Edital Estágio – 2024-2:
+Datas para Estágio Obrigatório:
+Até 20/12/2024: Matrícula no ECO (incluindo validação por experiência profissional).
+Até 06/02/2025: Definição da banca examinadora.
+Até 14/02/2025: Apresentação para a banca examinadora.
+Até 21/02/2025: Entrega da versão final do Relatório Final de Estágio Curricular Obrigatório (após a apresentação).
+_CAPITULO_ Normas e Regulamentos de Estágio
+Regulamento de Estágios: https://sei.utfpr.edu.br/sei/publicacoes/controlador_publicacoes.php?acao=publicacao_visualizar&id_documento=1608522&id_orgao_publicacao=0
+Regulamento dos Estágios dos Cursos de Educação Profissional Técnica de Nível Médio e do Ensino Superior da UTFPR.
+Lei nº 11.788, de 25 de setembro de 2008, que regulamenta o estágio de estudantes: http://www.planalto.gov.br/ccivil_03/_ato2007-2010/2008/lei/l11788.htm
+Resolução 05/2016, do MEC, que trata das Diretrizes Curriculares Nacionais para cursos de graduação na área da Computação: http://portal.mec.gov.br/index.php?option=com_docman&view=download&alias=52101-rces005-16-pdf&category_slug=novembro-2016-pdf&Itemid=30192
+Regulamento Complementar do Estágio Curricular Obrigatório do Curso de Engenharia de Software da UTFPR – Câmpus Dois Vizinhos: https://sei.utfpr.edu.br/sei/publicacoes/controlador_publicacoes.php?acao=publicacao_visualizar&id_documento=2620230&id_orgao_publicacao=0
+Sistemas para Controle de Estágio
+SIACOES: http://coensapp.dv.utfpr.edu.br/siacoes
+Sistema Integrado de Atividades Complementares, Orientações e Estágios do Curso de Engenharia de Software.
+Usado para gerenciar estágios em execução e agendamento de bancas de estágio obrigatório.
+Sistema Integrado de Estágios da UTFPR: https://estagio.utfpr.edu.br/
+Sistema interno da UTFPR, onde os estágios são registrados.
+_CAPITULO_ - DO ESTÁGIO E CONSIDERAÇÕES PRELIMINARES
+O ECO do Curso de Engenharia de Software da UTFPR, Campus Dois Vizinhos, seguirá a regulamentação apresentada no preâmbulo desta Instrução Normativa.
+O estudante deve acompanhar a legislação de estágio e suas modificações. O PRAE, junto com o coordenador de curso, proporá alterações no regulamento.
+Atividades do ECO não podem ser contabilizadas em outras atividades de carga horária obrigatória do curso.
+Todos os documentos citados estão disponíveis na página oficial da UTFPR sobre Estágios e no SIACOES.
+O estudante deve estar matriculado no mínimo no 6º período e ter cursado disciplinas relevantes.
+Cada caso será julgado pelo PRAE, podendo ser referendado pelo colegiado do curso.
+A assinatura do Termo de Compromisso de Estágio (TCE) é necessária para o início do ECO.
+Carga horária mínima do ECO: 400 horas.
+As atividades devem estar relacionadas com as áreas de atuação do curso, conforme o perfil de egresso e o Projeto Pedagógico do Curso.
+O ECO pode ser desenvolvido em mais de uma UCE, respeitando a carga horária mínima de 100 horas em cada.
+Um Plano de Estágio e um TCE são necessários para cada UCE em caso de estágio em mais de uma.
+_CAPITULO_ - DA MATRÍCULA E DURAÇÃO DO ESTÁGIO CURRICULAR OBRIGATÓRIO
+A matrícula será feita:
+Via sistema acadêmico, se o estágio coincidir com o calendário acadêmico.
+Via solicitação ao PRAE, para estágios fora do calendário letivo.
+A matrícula só poderá ser efetivada após a assinatura do TCE.
+O plano de estágio deve ser entregue ao PRAE 10 dias antes do início do ECO.
+DA UTILIZAÇÃO DE ATIVIDADES DE PESQUISA, EXTENSÃO E INOVAÇÃO TECNOLÓGICA COMO ESTÁGIO CURRICULAR OBRIGATÓRIO
+O estudante pode realizar o estágio como bolsista ou voluntário em programas de pesquisa, extensão, e inovação, desde que atendam à área de formação.
+Não é permitido o aproveitamento de atividades como TCC, auxílio estudantil, monitoria, entre outros.
+O PRAE definirá os documentos necessários para validação das atividades.
+_CAPITULO_ - DA AVALIAÇÃO DO ESTÁGIO
+A avaliação final é feita pela banca examinadora, considerando os relatórios do estudante, supervisor e orientador.
+Seção I - Supervisor
+O Supervisor avalia por meio de Relatório Parcial de Estágio a cada 6 meses, conforme a duração do estágio.
+Seção II - Orientador
+O orientador avalia o estágio usando vários relatórios, incluindo os elaborados pelo estudante e supervisor.
+Seção III - Banca Examinadora
+A banca é composta pelo orientador e mais dois membros, avaliando a apresentação do relatório final.
+DA AVALIAÇÃO DE ESTÁGIO CURRICULAR OBRIGATÓRIO PELA BANCA EXAMINADORA
+A avaliação será feita por meio de uma apresentação do relatório final, agendada pelo estudante.
+A defesa pode ser presencial ou remota.
+O estudante deve marcar a defesa dentro de 60 dias após o término do estágio.
+Os relatórios devem seguir modelos disponíveis no site da UTFPR.
+O modelo de Relatório Final de Estágio deve ser no formato de monografia e incluir a Carta de Anuência do Supervisor.
+Serão emitidas declarações para estagiários, professores orientadores e membros da banca.
+O Colegiado do Curso e o PRAE elaborarão e alterarão esta Instrução Normativa conforme necessário.
+Casos omissos serão tratados pelo Colegiado do Curso, a partir de solicitações.
+Revoga o Regulamento Complementar do Estágio aprovado em 15 de julho de 2020.
+A Instrução Normativa entra em vigor a partir de 1º de dezembro de 2021.

@@ -23,7 +23,7 @@ public class EmbeddingService {
 
     public void load(){
         try {
-            String content = new String(Files.readAllBytes(toPath("regulamento.txt")));
+            String content = new String(Files.readAllBytes(toPath("regulamento2.txt")));
             List<Document> documentList = setDocumentList(content);
             pgVectorRepository.add(documentList);
         } catch (IOException e) {

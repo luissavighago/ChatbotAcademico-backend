@@ -62,7 +62,7 @@ public class LlmOpenAIService {
     }
 
     private Prompt createPrompt(String question, String chatHistory) {
-        List<Document> results = searchSimilarity(question);
+        List<Document> results = searchSimilarity(question + chatHistory);
         PromptTemplate promptTemplate = new PromptTemplate(
                 PromptTemplateEnum.CHAT_HISTORY.getTemplate(),
                 Map.of(
@@ -74,7 +74,12 @@ public class LlmOpenAIService {
     }
 
     private List<Document> searchSimilarity(String question) {
-        return pgVectorRepository.searchSimilarity(SearchRequest.query(question).withTopK(2));
+        return pgVectorRepository.searchSimilarity(
+                SearchRequest.defaults()
+                        .withQuery(question)
+                        .withTopK(5)
+                        .withSimilarityThreshold(0.7)
+        );
     }
 
     private String getDocumentInformationMessage(List<Document> results) {

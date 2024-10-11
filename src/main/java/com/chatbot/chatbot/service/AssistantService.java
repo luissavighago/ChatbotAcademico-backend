@@ -73,27 +73,15 @@ public class AssistantService {
     }
 
     private String concatQuestions(List<QuestionModel> lastQuestions) {
-        StringBuilder jsonResult = new StringBuilder("[");
+        StringBuilder chatHistory = new StringBuilder();
 
         for (QuestionModel questionModel : lastQuestions) {
             String answer = questionModel.getAnswer() == null ? "" : questionModel.getAnswer().getAnswer();
-            jsonResult.append("{")
-                    .append("\"question\":\"").append(questionModel.getQuestion()).append("\",")
-                    .append("\"response\":\"").append(answer).append("\"")
-                    .append("},");
+            chatHistory.append("Pergunta: ").append(questionModel.getQuestion())
+                    .append(" | Resposta: ").append(answer)
+                    .append("\n");
         }
 
-        // Remove a última vírgula e fecha o JSON
-        if (jsonResult.length() > 1) {
-            jsonResult.deleteCharAt(jsonResult.length() - 1);
-        }
-        jsonResult.append("]");
-
-        return jsonResult.toString();
-    }
-
-    private String formatQuestionAnswer(QuestionModel questionModel) {
-        String answer = questionModel.getAnswer() == null ? "" : questionModel.getAnswer().getAnswer();
-        return String.format("{\"question\":\"%s\", \"response\":\"%s\"}", questionModel.getQuestion(), answer);
+        return chatHistory.toString();
     }
 }
