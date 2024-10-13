@@ -24,8 +24,9 @@ public class AnswerModel implements Serializable {
     @Column(nullable = false, columnDefinition = "TEXT")
     private String answer;
 
+    //P - POSITIVE, N - NEGATIVE, U - UNRATED
     @Column(nullable = false, length = 1)
-    private char status = 'P';
+    private String feedbackStatus = "U";
 
     @Column(name = "dhResponse", nullable = false, updatable = false)
     private LocalDateTime dhResponse;

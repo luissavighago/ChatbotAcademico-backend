@@ -1,7 +1,6 @@
 package com.chatbot.chatbot.service;
 
-import com.chatbot.chatbot.dto.ChatResponseDTO;
-import com.chatbot.chatbot.dto.RestResponseDTO;
+import com.chatbot.chatbot.dto.*;
 import com.chatbot.chatbot.models.ChatModel;
 import com.chatbot.chatbot.models.QuestionModel;
 import com.chatbot.chatbot.models.AnswerModel;
@@ -22,28 +21,31 @@ public class AssistantService {
     @Autowired
     private ChatService chatService;
 
-    public RestResponseDTO sendQuestion(String question) {
-        String answer = llmOpenAIService.call(question);
+    public RestResponseDTO sendQuestion(QuestionRecordDTO questionRecordDTO) {
+        ChatModel chatModel;
+        String answer;
 
-        //armazenar os dados da conversa
-        ChatModel chatModel = chatService.createChat();
-        QuestionModel questionModel = chatService.createQuestion(chatModel, question);
-        AnswerModel answerModel = chatService.createAnswer(questionModel, answer);
+        if(questionRecordDTO.idChat() == null){
+            chatModel = chatService.createChat();
+            answer = llmOpenAIService.call(questionRecordDTO.question());
+        }else{
+            chatModel = chatService.findChatById(questionRecordDTO.idChat());
+            answer = llmOpenAIService.call(questionRecordDTO.question(), getChatHistory(chatModel));
+        }
 
+        AnswerModel answerModel = storeAnswer(chatModel, questionRecordDTO.question(), answer);
         return setResponseDTO(answerModel);
     }
 
-    public RestResponseDTO sendQuestion(String question, UUID idChat) {
-        ChatModel chatModel = chatService.findChatById(idChat);
-        String chatHistory = getChatHistory(chatModel);
+    public void evaluateAnswer(UUID idAnswer, EvaluateAnswerRecordDTO evaluateAnswerRecordDTO) {
+        AnswerModel answerModel = chatService.findAnswerById(idAnswer);
+        answerModel.setFeedbackStatus(evaluateAnswerRecordDTO.feedbackStatus());
+        chatService.updateAnswer(answerModel);
+    }
 
-        String answer = llmOpenAIService.call(question, chatHistory);
-
-        //armazenar os dados da conversa
+    private AnswerModel storeAnswer(ChatModel chatModel, String question, String answer) {
         QuestionModel questionModel = chatService.createQuestion(chatModel, question);
-        AnswerModel answerModel = chatService.createAnswer(questionModel, answer);
-
-        return setResponseDTO(answerModel);
+        return chatService.createAnswer(questionModel, answer);
     }
 
     private RestResponseDTO setResponseDTO(AnswerModel answerModel) {

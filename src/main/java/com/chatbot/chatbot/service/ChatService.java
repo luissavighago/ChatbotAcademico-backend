@@ -8,6 +8,7 @@ import com.chatbot.chatbot.repository.QuestionRepository;
 import com.chatbot.chatbot.repository.AnswerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.webjars.NotFoundException;
 
 import java.util.UUID;
 
@@ -62,6 +63,18 @@ public class ChatService {
     }
 
     public ChatModel findChatById(UUID id) {
-        return chatRepository.findById(id).orElseThrow(() -> new RuntimeException("Chat não encontrado"));
+        return chatRepository.findById(id).orElseThrow(() -> new NotFoundException("Chat não encontrado"));
+    }
+
+    public AnswerModel findAnswerById(UUID id) {
+        return answerRepository.findById(id).orElseThrow(() -> new NotFoundException("Resposta não encontrada"));
+    }
+
+    public void updateAnswer(AnswerModel answerModel) {
+        try{
+            answerRepository.save(answerModel);
+        }catch (Exception e) {
+            throw new RuntimeException("Falha ao armazenar a resposta");
+        }
     }
 }
