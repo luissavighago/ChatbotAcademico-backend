@@ -77,7 +77,7 @@ public class LlmOpenAIService {
         return pgVectorRepository.searchSimilarity(
                 SearchRequest.defaults()
                         .withQuery(question)
-                        .withTopK(5)
+                        .withTopK(8)
                         .withSimilarityThreshold(0.7)
         );
     }
