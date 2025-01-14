@@ -27,10 +27,10 @@ public class AssistantService {
 
         if(questionRecordDTO.idChat() == null){
             chatModel = chatService.createChat();
-            answer = llmOpenAIService.call(questionRecordDTO.question());
+            answer = llmOpenAIService.call(questionRecordDTO);
         }else{
             chatModel = chatService.findChatById(questionRecordDTO.idChat());
-            answer = llmOpenAIService.call(questionRecordDTO.question(), getChatHistory(chatModel));
+            answer = llmOpenAIService.call(questionRecordDTO, getChatHistory(chatModel));
         }
 
         AnswerModel answerModel = storeAnswer(chatModel, questionRecordDTO.question(), answer);
