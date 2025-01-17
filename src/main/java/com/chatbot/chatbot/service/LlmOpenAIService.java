@@ -1,6 +1,7 @@
 package com.chatbot.chatbot.service;
 
 import com.chatbot.chatbot.dto.QuestionRecordDTO;
+import com.chatbot.chatbot.enums.PromptTechniqueEnum;
 import com.chatbot.chatbot.enums.PromptTemplateEnum;
 import com.chatbot.chatbot.exception.LlmServiceException;
 import com.chatbot.chatbot.repository.PGVectorRepository;
@@ -21,7 +22,7 @@ import java.util.Map;
 public class LlmOpenAIService {
 
     @Autowired
-    private PGVectorRepository pgVectorRepository;
+    private PromptTemplateService promptTemplateService;
 
     private final OpenAiChatModel chatModel;
 
@@ -30,11 +31,15 @@ public class LlmOpenAIService {
     }
 
     public String call(QuestionRecordDTO questionRecordDTO) {
-        return callModel(createPrompt(questionRecordDTO.question()), questionRecordDTO.apiKey());
+        return callModel(promptTemplateService.createPromptDefault(questionRecordDTO.question()), questionRecordDTO.apiKey());
     }
 
     public String call(QuestionRecordDTO questionRecordDTO, String chatHistory) {
-        return callModel(createPrompt(questionRecordDTO.question(), chatHistory), questionRecordDTO.apiKey());
+        return callModel(promptTemplateService.createPromptDefault(questionRecordDTO.question(), chatHistory), questionRecordDTO.apiKey());
+    }
+
+    public String callUsingPromptTechnique(QuestionRecordDTO questionRecordDTO, PromptTechniqueEnum technique) {
+        return callModel(promptTemplateService.createPromptByTechnique(questionRecordDTO.question(), technique), questionRecordDTO.apiKey());
     }
 
     private String callModel(Prompt prompt, String apiKey) {
@@ -59,39 +64,5 @@ public class LlmOpenAIService {
         }catch (Exception e) {
             throw new LlmServiceException("Falha ao acessar a API da OpenAI");
         }
-    }
-
-    private Prompt createPrompt(String question) {
-        List<Document> results = searchSimilarity(question);
-        PromptTemplate promptTemplate = new PromptTemplate(
-                PromptTemplateEnum.DEFAULT.getTemplate(),
-                Map.of("information", getDocumentInformationMessage(results), "question", question)
-        );
-        return promptTemplate.create();
-    }
-
-    private Prompt createPrompt(String question, String chatHistory) {
-        List<Document> results = searchSimilarity(question + chatHistory);
-        PromptTemplate promptTemplate = new PromptTemplate(
-                PromptTemplateEnum.CHAT_HISTORY.getTemplate(),
-                Map.of(
-                        "chat_history",chatHistory,
-                        "information", getDocumentInformationMessage(results),
-                        "question", question)
-        );
-        return promptTemplate.create();
-    }
-
-    private List<Document> searchSimilarity(String question) {
-        return pgVectorRepository.searchSimilarity(
-                SearchRequest.defaults()
-                        .withQuery(question)
-                        .withTopK(8)
-                        .withSimilarityThreshold(0.7)
-        );
-    }
-
-    private String getDocumentInformationMessage(List<Document> results) {
-        return results.stream().map(Document::getContent).reduce("", String::concat);
     }
 }

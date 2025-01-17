@@ -24,7 +24,7 @@ public class AssistantController {
     @Autowired
     private AssistantService assistantService;
 
-    @Operation(summary = "Obtem uma resposta dando incio a conversa", method = "GET")
+    @Operation(summary = "Obtem uma resposta dando incio a conversa", method = "POST")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Sucesso ao obter a resposta"),
             @ApiResponse(responseCode = "400", description = "Parametros inválidos"),

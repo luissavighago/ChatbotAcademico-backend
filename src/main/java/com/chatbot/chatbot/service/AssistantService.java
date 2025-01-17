@@ -78,12 +78,24 @@ public class AssistantService {
         StringBuilder chatHistory = new StringBuilder();
 
         for (QuestionModel questionModel : lastQuestions) {
-            String answer = questionModel.getAnswer() == null ? "" : questionModel.getAnswer().getAnswer();
+            String answer = getAnswerByQuestion(questionModel);
             chatHistory.append("Pergunta: ").append(questionModel.getQuestion())
                     .append(" | Resposta: ").append(answer)
                     .append("\n");
         }
 
         return chatHistory.toString();
+    }
+
+    private String getAnswerByQuestion(QuestionModel questionModel) {
+        if(questionModel.getAnswers() == null || questionModel.getAnswers().isEmpty()){
+            return "";
+        }
+
+        if(questionModel.getAnswers().get(0).getAnswer() == null || questionModel.getAnswers().get(0).getAnswer().isEmpty()){
+            return "";
+        }
+
+        return questionModel.getAnswers().get(0).getAnswer();
     }
 }

@@ -6,6 +6,7 @@ import lombok.Setter;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.UUID;
 
 @Entity
@@ -25,8 +26,8 @@ public class QuestionModel implements Serializable {
     @JoinColumn(name = "chat", nullable = false)
     private ChatModel chat;
 
-    @OneToOne(mappedBy = "question", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
-    private AnswerModel answer;
+    @OneToMany(mappedBy = "question", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
+    private List<AnswerModel> answers;
 
     @PrePersist
     protected void onCreate() {

@@ -1,5 +1,6 @@
 package com.chatbot.chatbot.service;
 
+import com.chatbot.chatbot.enums.PromptTechniqueEnum;
 import com.chatbot.chatbot.models.ChatModel;
 import com.chatbot.chatbot.models.QuestionModel;
 import com.chatbot.chatbot.models.AnswerModel;
@@ -48,11 +49,16 @@ public class ChatService {
         }
     }
 
-    public AnswerModel createAnswer(QuestionModel questionModel, String response) {
+    public AnswerModel createAnswer(QuestionModel questionModel, String answer) {
+        return createAnswer(questionModel, answer, PromptTechniqueEnum.DEFAULT);
+    }
+
+    public AnswerModel createAnswer(QuestionModel questionModel, String answer, PromptTechniqueEnum technique) {
         try{
             AnswerModel answerModel = new AnswerModel();
-            answerModel.setAnswer(response);
+            answerModel.setAnswer(answer);
             answerModel.setQuestion(questionModel);
+            answerModel.setPromptTechnique(technique.getKey());
 
             answerRepository.save(answerModel);
 

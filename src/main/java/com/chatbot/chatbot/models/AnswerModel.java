@@ -17,7 +17,7 @@ public class AnswerModel implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private UUID idAnswer;
 
-    @OneToOne
+    @ManyToOne
     @JoinColumn(name = "idQuestion", nullable = false)
     private QuestionModel question;
 
@@ -30,6 +30,10 @@ public class AnswerModel implements Serializable {
 
     @Column(name = "dhResponse", nullable = false, updatable = false)
     private LocalDateTime dhResponse;
+
+    //Z - ZERO_SHOT, F - FEW_SHOTS, C - CHAIN_OF_THOUGHT, D - DEFAULT
+    @Column(nullable = false, length = 1)
+    private String promptTechnique = "D";
 
     @PrePersist
     protected void onCreate() {dhResponse = LocalDateTime.now();}
