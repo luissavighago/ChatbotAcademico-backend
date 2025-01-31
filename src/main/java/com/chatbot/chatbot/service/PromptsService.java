@@ -8,6 +8,9 @@ import com.chatbot.chatbot.enums.PromptTechniqueEnum;
 import com.chatbot.chatbot.models.AnswerModel;
 import com.chatbot.chatbot.models.ChatModel;
 import com.chatbot.chatbot.models.QuestionModel;
+import com.chatbot.chatbot.repository.PGVectorRepository;
+import org.springframework.ai.document.Document;
+import org.springframework.ai.vectorstore.SearchRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -21,19 +24,23 @@ public class PromptsService {
     private LlmOpenAIService llmOpenAIService;
 
     @Autowired
+    private PGVectorRepository pgVectorRepository;
+
+    @Autowired
     private ChatService chatService;
 
     public RestResponseDTO askWithPrompts(QuestionRecordDTO questionRecordDTO) {
         ChatModel chatModel = chatService.createChat();
         QuestionModel questionModel = chatService.createQuestion(chatModel, questionRecordDTO.question());
         List<AnswerModel> answerModelList = new ArrayList<>();
+        String context = getContext(questionRecordDTO.question());
 
         for (PromptTechniqueEnum technique : PromptTechniqueEnum.values()) {
             if(technique.equals(PromptTechniqueEnum.DEFAULT)) {
                 continue;
             }
 
-            String answer = llmOpenAIService.callUsingPromptTechnique(questionRecordDTO, technique);
+            String answer = llmOpenAIService.callUsingPromptTechnique(questionRecordDTO, technique, context);
             AnswerModel answerModel = chatService.createAnswer(questionModel, answer, technique);
             answerModelList.add(answerModel);
         }
@@ -60,5 +67,16 @@ public class PromptsService {
 
         promptResponseDTO.setAnswers(answerResponseDTOList);
         return new RestResponseDTO(true, promptResponseDTO);
+    }
+
+    private String getContext(String question) {
+        List<Document> results = pgVectorRepository.searchSimilarity(
+                SearchRequest.defaults()
+                        .withQuery(question)
+                        .withTopK(8)
+                        .withSimilarityThreshold(0.7)
+        );
+
+        return results.stream().map(Document::getContent).reduce("", String::concat);
     }
 }

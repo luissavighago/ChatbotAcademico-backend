@@ -38,8 +38,8 @@ public class LlmOpenAIService {
         return callModel(promptTemplateService.createPromptDefault(questionRecordDTO.question(), chatHistory), questionRecordDTO.apiKey());
     }
 
-    public String callUsingPromptTechnique(QuestionRecordDTO questionRecordDTO, PromptTechniqueEnum technique) {
-        return callModel(promptTemplateService.createPromptByTechnique(questionRecordDTO.question(), technique), questionRecordDTO.apiKey());
+    public String callUsingPromptTechnique(QuestionRecordDTO questionRecordDTO, PromptTechniqueEnum technique, String context) {
+        return callModel(promptTemplateService.createPromptByTechnique(questionRecordDTO.question(), technique, context), questionRecordDTO.apiKey());
     }
 
     private String callModel(Prompt prompt, String apiKey) {

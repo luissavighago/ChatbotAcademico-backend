@@ -40,11 +40,10 @@ public class PromptTemplateService {
         return promptTemplate.create();
     }
 
-    public Prompt createPromptByTechnique(String question, PromptTechniqueEnum technique) {
-        List<Document> results = searchSimilarity(question);
+    public Prompt createPromptByTechnique(String question, PromptTechniqueEnum technique, String context) {
         PromptTemplate promptTemplate = new PromptTemplate(
                 getTemplateByTechnique(technique),
-                Map.of("information", getDocumentInformationMessage(results), "question", question)
+                Map.of("information", context, "question", question)
         );
         return promptTemplate.create();
     }
