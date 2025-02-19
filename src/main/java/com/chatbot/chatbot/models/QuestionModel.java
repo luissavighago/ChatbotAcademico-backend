@@ -19,8 +19,10 @@ public class QuestionModel implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private UUID idQuestion;
-    private String question;
     private LocalDateTime dhQuestion;
+
+    @Column(nullable = false, columnDefinition = "TEXT")
+    private String question;
 
     @ManyToOne
     @JoinColumn(name = "chat", nullable = false)
